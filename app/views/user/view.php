@@ -94,6 +94,23 @@
 </head>
 <body>
     <h1>Welcome to View Page</h1>
+    <div style="text-align:center; margin-bottom: 25px;">
+        <a href="<?= site_url('user/create'); ?>" style="
+            background: #2196F3;
+            color: #fff;
+            padding: 10px 22px;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            transition: background 0.3s, transform 0.2s;
+            display: inline-block;
+            margin-bottom: 10px;
+        " 
+        onmouseover="this.style.background='#1976D2';this.style.transform='translateY(-2px)';"
+        onmouseout="this.style.background='#2196F3';this.style.transform='none';"
+        >Add New User</a>
+    </div>
     <table>
         <tr>
             <th>ID</th>
@@ -101,7 +118,6 @@
             <th>Email</th>
             <th>Action</th>
         </tr>
-
         <?php foreach ($users as $user): ?>
             <tr>
                 <td><?= $user['id']; ?></td>
