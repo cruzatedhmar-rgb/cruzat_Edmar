@@ -7,96 +7,113 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background: linear-gradient(135deg, #1b5e20, #a5d6a7); /* dark green + light green gradient */
+            background: linear-gradient(120deg, #43cea2, #185a9d);
             min-height: 100vh;
         }
-        .search-form {
-            position: sticky;
-            top: 0;
-            background-color: #e8f5e9; /* very light green */
-            z-index: 1000;
-            padding: 15px 0;
-            border-bottom: 2px solid #1b5e20;
-        }
-        .table thead {
-            background-color: #1b5e20; /* dark green */
-            color: white;
-        }
-        .table tbody tr:hover {
-            background-color: #c8e6c9; /* light green hover */
-        }
-        .card {
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            border: 1px solid #1b5e20;
-        }
-        .card-header {
-            background-color: #2e7d32; /* slightly lighter dark green */
+        .main-header {
+            text-align: center;
+            padding: 2rem 0 1rem 0;
             color: #fff;
-            font-weight: bold;
+            letter-spacing: 2px;
+            font-weight: 700;
+            font-size: 2.5rem;
+            background: rgba(24,90,157,0.7);
+            border-radius: 0 0 1rem 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 16px rgba(24,90,157,0.1);
         }
-        .btn-primary {
-            background-color: #2e7d32;
-            border-color: #2e7d32;
+        .search-form {
+            background: #fff;
+            border-radius: 1rem;
+            box-shadow: 0 2px 8px rgba(67,206,162,0.08);
+            padding: 1rem 2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
         }
-        .btn-primary:hover {
-            background-color: #1b5e20;
-            border-color: #1b5e20;
+        .search-form input[type="text"] {
+            border-radius: 2rem;
+            border: 1px solid #43cea2;
+            padding-left: 1.2rem;
+        }
+        .search-form .btn-primary {
+            border-radius: 2rem;
+            background: linear-gradient(90deg, #43cea2, #185a9d);
+            border: none;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+        .students-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 2rem;
+        }
+        .student-card {
+            background: #fff;
+            border-radius: 1.2rem;
+            box-shadow: 0 4px 16px rgba(24,90,157,0.10);
+            padding: 2rem 1.5rem 1.5rem 1.5rem;
+            transition: transform 0.15s, box-shadow 0.15s;
+            border: none;
+            position: relative;
+        }
+        .student-card:hover {
+            transform: translateY(-6px) scale(1.03);
+            box-shadow: 0 8px 32px rgba(24,90,157,0.18);
+        }
+        .student-card .student-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #185a9d;
+            margin-bottom: 0.2rem;
+        }
+        .student-card .student-email {
+            font-size: 0.98rem;
+            color: #43cea2;
+            margin-bottom: 0.7rem;
+        }
+        .student-card .student-info {
+            font-size: 0.97rem;
+            color: #444;
+        }
+        .pagination {
+            justify-content: center;
+            margin-top: 2rem;
         }
     </style>
 </head>
 <body>
 <div class="container py-4">
-
-    <div class="search-form row mb-3">
-        <div class="col-md-6">
-            <h2 class="text-success">Students List</h2>
-        </div>
-        <div class="col-md-6 d-flex justify-content-end">
-            <form action="<?= site_url('author'); ?>" method="get" class="d-flex w-100" style="max-width: 400px;">
-                <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
-                <input class="form-control me-2" name="q" type="text" placeholder="Search..." value="<?= html_escape($q); ?>">
-                <button type="submit" class="btn btn-primary">Search</button>
-            </form>
-        </div>
+    <div class="main-header">
+        <span>Students Directory</span>
     </div>
-
-    <div class="card">
-        <div class="card-header">
-            Students List
-        </div>
-        <div class="card-body p-0">
-            <div class="table-responsive">
-                <table class="table table-hover mb-0">
-                    <thead>
-                    <tr>
-                        <th>Firstname</th>
-                        <th>Lastname</th>
-                        <th>Email</th>
-                        <th>Birthdate</th>
-                        <th>Added</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php foreach (html_escape($all) as $author): ?>
-                        <tr>
-                            <td><?= $author['first_name']; ?></td>
-                            <td><?= $author['last_name']; ?></td>
-                            <td><?= $author['email']; ?></td>
-                            <td><?= $author['birthdate']; ?></td>
-                            <td><?= $author['added']; ?></td>
-                        </tr>
-                    <?php endforeach; ?>
-                    </tbody>
-                </table>
+    <form action="<?= site_url('author'); ?>" method="get" class="search-form">
+        <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
+        <input class="form-control" name="q" type="text" placeholder="Search students..." value="<?= html_escape($q); ?>">
+        <button type="submit" class="btn btn-primary px-4">Search</button>
+    </form>
+    <div class="students-grid">
+        <?php foreach (html_escape($all) as $author): ?>
+            <div class="student-card">
+                <div class="student-name">
+                    <?= $author['first_name']; ?> <?= $author['last_name']; ?>
+                </div>
+                <div class="student-email">
+                    <?= $author['email']; ?>
+                </div>
+                <div class="student-info">
+                    <strong>Birthdate:</strong> <?= $author['birthdate']; ?><br>
+                    <strong>Added:</strong> <?= $author['added']; ?>
+                </div>
             </div>
-        </div>
-        <div class="card-footer text-end">
-            <?= $page; ?>
-        </div>
+        <?php endforeach; ?>
     </div>
-
+    <div class="d-flex pagination">
+        <?= $page; ?>
+    </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
