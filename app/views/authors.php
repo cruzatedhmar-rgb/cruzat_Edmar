@@ -86,8 +86,9 @@
 </head>
 <body>
 <div class="container py-4">
-    <div class="main-header">
+    <div class="main-header d-flex justify-content-between align-items-center">
         <span>Students Directory</span>
+        <a href="<?= site_url('author/create'); ?>" class="btn btn-success btn-lg shadow-sm">+ Add Student</a>
     </div>
     <form action="<?= site_url('author'); ?>" method="get" class="search-form">
         <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
@@ -103,9 +104,13 @@
                 <div class="student-email">
                     <?= $author['email']; ?>
                 </div>
-                <div class="student-info">
+                <div class="student-info mb-2">
                     <strong>Birthdate:</strong> <?= $author['birthdate']; ?><br>
                     <strong>Added:</strong> <?= $author['added']; ?>
+                </div>
+                <div class="d-flex gap-2">
+                    <a href="<?= site_url('author/edit/' . $author['id']); ?>" class="btn btn-warning btn-sm">Edit</a>
+                    <a href="<?= site_url('author/delete/' . $author['id']); ?>" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this student?');">Delete</a>
                 </div>
             </div>
         <?php endforeach; ?>

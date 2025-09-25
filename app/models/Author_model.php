@@ -27,5 +27,25 @@
                 return $data;
             }
         }
+
+        // CREATE: Add new author
+        public function create_author($data) {
+            return $this->db->table('authors')->insert($data);
+        }
+
+        // READ: Get author by ID
+        public function get_author($id) {
+            return $this->db->table('authors')->where('id', $id)->get();
+        }
+
+        // UPDATE: Update author by ID
+        public function update_author($id, $data) {
+            return $this->db->table('authors')->where('id', $id)->update($data);
+        }
+
+        // DELETE: Delete author by ID
+        public function delete_author($id) {
+            return $this->db->table('authors')->where('id', $id)->delete();
+        }
     }
 ?>
