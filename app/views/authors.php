@@ -88,15 +88,7 @@
 <div class="container py-4">
     <div class="main-header d-flex justify-content-between align-items-center">
         <span>Students Directory</span>
-        <div>
-            <a href="<?= site_url('author/create'); ?>" class="btn btn-success btn-lg shadow-sm">+ Add Student</a>
-            <?php if (isset($_SESSION['user_id'])): ?>
-                <a href="<?= site_url('auth/logout'); ?>" class="btn btn-outline-light ms-2">Logout (<?= $_SESSION['username']; ?>)</a>
-            <?php else: ?>
-                <a href="<?= site_url('auth/login'); ?>" class="btn btn-outline-light ms-2">Login</a>
-                <a href="<?= site_url('auth/register'); ?>" class="btn btn-outline-light ms-2">Register</a>
-            <?php endif; ?>
-        </div>
+        <a href="<?= site_url('author/create'); ?>" class="btn btn-success btn-lg shadow-sm">+ Add Student</a>
     </div>
     <form action="<?= site_url('author'); ?>" method="get" class="search-form">
         <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>

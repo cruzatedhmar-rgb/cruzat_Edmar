@@ -5,10 +5,6 @@ class Author extends Controller {
 
     public function all() 
     {
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /auth/login');
-            exit;
-        }
         $page = 1;
         if(isset($_GET['page']) && ! empty($_GET['page'])) {
             $page = $this->io->get('page');
@@ -37,12 +33,8 @@ class Author extends Controller {
         $this->call->view('authors', $data);
     }
 
-    // Show add form (with authentication)
+    // Show add form
     public function create() {
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /auth/login');
-            exit;
-        }
         $this->call->view('author_form', ['action' => 'create']);
     }
 
@@ -59,12 +51,8 @@ class Author extends Controller {
         redirect(site_url('author'));
     }
 
-    // Show edit form (with authentication)
+    // Show edit form
     public function edit($id) {
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /auth/login');
-            exit;
-        }
         $author = $this->author_model->get_author($id);
         $this->call->view('author_form', ['author' => $author, 'action' => 'edit']);
     }
@@ -81,16 +69,8 @@ class Author extends Controller {
         redirect(site_url('author'));
     }
 
-    // Handle delete (with authentication & admin authorization)
+    // Handle delete
     public function delete($id) {
-        if (!isset($_SESSION['user_id'])) {
-            header('Location: /auth/login');
-            exit;
-        }
-        // Only allow admin role to delete
-        if (isset($_SESSION['role']) && $_SESSION['role'] !== 'admin') {
-            die('Unauthorized. Only admin can delete authors.');
-        }
         $this->author_model->delete_author($id);
         redirect(site_url('author'));
     }
