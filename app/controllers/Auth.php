@@ -1,11 +1,15 @@
+<?php
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+
+class Auth extends Controller {
     public function logout() {
         session_destroy();
         header('Location: /auth/login');
         exit;
     }
+
     public function login() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userModel = model('User_model');
@@ -23,8 +27,6 @@ if (session_status() === PHP_SESSION_NONE) {
         }
         return view('login');
     }
-<?php
-class Auth extends Controller {
     public function register() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $userModel = model('User_model');
