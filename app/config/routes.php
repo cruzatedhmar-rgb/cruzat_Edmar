@@ -1,3 +1,6 @@
+$router->get('/auth/logout', 'Auth::logout');
+$router->get('/auth/login', 'Auth::login');
+$router->post('/auth/login', 'Auth::login');
 <?php
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 /**
@@ -52,3 +55,6 @@ $router->post('/author/store', 'Author::store'); // Handle add
 $router->get('/author/edit/{id}', 'Author::edit'); // Show edit form
 $router->post('/author/update/{id}', 'Author::update'); // Handle update
 $router->get('/author/delete/{id}', 'Author::delete'); // Handle delete
+
+$router->get('/auth/register', 'Auth::register');
+$router->post('/auth/register', 'Auth::register');

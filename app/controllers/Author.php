@@ -38,6 +38,14 @@ class Author extends Controller {
         $this->call->view('author_form', ['action' => 'create']);
     }
 
+    public function create() {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /auth/login');
+            exit;
+        }
+        $this->call->view('author_form', ['action' => 'create']);
+    }
+
     // Handle add
     public function store() {
         $data = [
@@ -57,6 +65,15 @@ class Author extends Controller {
         $this->call->view('author_form', ['author' => $author, 'action' => 'edit']);
     }
 
+    public function edit($id) {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /auth/login');
+            exit;
+        }
+        $author = $this->author_model->get_author($id);
+        $this->call->view('author_form', ['author' => $author, 'action' => 'edit']);
+    }
+
     // Handle update
     public function update($id) {
         $data = [
@@ -71,6 +88,19 @@ class Author extends Controller {
 
     // Handle delete
     public function delete($id) {
+        $this->author_model->delete_author($id);
+        redirect(site_url('author'));
+    }
+
+    public function delete($id) {
+        if (!isset($_SESSION['user_id'])) {
+            header('Location: /auth/login');
+            exit;
+        }
+        // Optional: Only allow admin role to delete
+        if (isset($_SESSION['role']) && $_SESSION['role'] !== 'admin') {
+            die('Unauthorized. Only admin can delete authors.');
+        }
         $this->author_model->delete_author($id);
         redirect(site_url('author'));
     }
