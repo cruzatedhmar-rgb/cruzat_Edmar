@@ -5,3 +5,4 @@
     <button type="submit">Register</button>
 </form>
 <a href="/auth/login">Back to Login</a>
+ 

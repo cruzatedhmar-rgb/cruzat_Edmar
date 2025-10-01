@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Login</title>
-</head>
-<body>
-    <h2>Login</h2>
-    <?php if (isset($error)) echo '<p style="color:red;">' . $error . '</p>'; ?>
-    <form method="post" action="">
-        <label>Username: <input type="text" name="username" required></label><br>
-        <label>Password: <input type="password" name="password" required></label><br>
-        <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="/auth/register">Register here</a>.</p>
-</body>
-</html>
+<h2>Login</h2>
+<?php if (!empty($error)): ?>
+    <p style="color:red;"><?= $error ?></p>
+<?php endif; ?>
+<form method="post" action="/auth/login">
+    <input type="text" name="username" placeholder="Username" required><br>
+    <input type="password" name="password" placeholder="Password" required><br>
+    <button type="submit">Login</button>
+</form>
+<a href="/auth/register">Register</a>

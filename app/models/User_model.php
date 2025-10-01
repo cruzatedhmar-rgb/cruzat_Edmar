@@ -1,17 +1,19 @@
 <?php
-class User_model extends Model {
+defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
+
+class User_model extends Model 
+{
     protected $table = 'users';
 
-    public function register($data) {
-        $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
-        return $this->insert($data);
-    }
-
     public function getByUsername($username) {
-        return $this->where('username', $username)->first();
+        return $this->db->table($this->table)
+                        ->where('username', $username)
+                        ->get()
+                        ->row_array();
     }
 
-    public function getByEmail($email) {
-        return $this->where('email', $email)->first();
+    public function insertUser($data) {
+        return $this->db->table($this->table)
+                        ->insert($data);
     }
 }
