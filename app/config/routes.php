@@ -1,7 +1,6 @@
-$router->get('/auth/logout', 'Auth::logout');
-$router->get('/auth/login', 'Auth::login');
-$router->post('/auth/login', 'Auth::login');
-<?php
+ <?php
+defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
+
 defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
 /**
  * ------------------------------------------------------------------
@@ -58,3 +57,6 @@ $router->get('/author/delete/{id}', 'Author::delete'); // Handle delete
 
 $router->get('/auth/register', 'Auth::register');
 $router->post('/auth/register', 'Auth::register');
+$router->get('/auth/logout', 'Auth::logout');
+$router->get('/auth/login', 'Auth::login');
+$router->post('/auth/login', 'Auth::login');
