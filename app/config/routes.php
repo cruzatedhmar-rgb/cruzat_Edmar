@@ -49,10 +49,10 @@ $router->post('/auth/login', 'Auth::login');
 $router->get('/auth/register', 'Auth::register');
 $router->post('/auth/register', 'Auth::register');
 $router->get('/auth/logout', 'Auth::logout');
-$router->get('/auth/forgot_password', 'Auth::forgot_password');
-$router->post('/auth/forgot_password', 'Auth::forgot_password');
-$router->get('/auth/reset_password', 'Auth::reset_password');
-$router->post('/auth/reset_password', 'Auth::reset_password');
+$router->get('/auth/forgot_password', 'Pages::forgot_password');
+$router->post('/auth/forgot_password', 'Pages::forgot_password');
+$router->get('/auth/reset_password', 'Pages::reset_password');
+$router->post('/auth/reset_password', 'Pages::reset_password');
 
 // Default route redirects to login
 $router->get('/', 'Auth::login');
