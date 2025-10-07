@@ -49,6 +49,35 @@ class User_model extends Model {
                     ->update($data);
     }
 
+    /**
+     * Save reset token (token, expires_at) for a user
+     */
+    public function save_reset_token($user_id, $token, $expires_at)
+    {
+        return $this->db->table($this->table)
+                    ->where($this->primary_key, $user_id)
+                    ->update(['reset_token' => $token, 'reset_expires_at' => $expires_at, 'updated_at' => date('Y-m-d H:i:s')]);
+    }
+
+    public function get_by_reset_token($token)
+    {
+        $row = $this->db->table($this->table)
+                    ->where('reset_token', $token)
+                    ->get();
+        if (!$row) return false;
+        if (isset($row['reset_expires_at']) && strtotime($row['reset_expires_at']) < time()) {
+            return false;
+        }
+        return $row;
+    }
+
+    public function clear_reset_token($user_id)
+    {
+        return $this->db->table($this->table)
+                    ->where($this->primary_key, $user_id)
+                    ->update(['reset_token' => null, 'reset_expires_at' => null, 'updated_at' => date('Y-m-d H:i:s')]);
+    }
+
     public function delete($id) {
         return $this->db->table($this->table)
                     ->where($this->primary_key, $id)

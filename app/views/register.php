@@ -129,6 +129,14 @@
                 <span class="input-icon">🔒</span>
                 <input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required>
             </div>
+
+            <div class="form-group">
+                <label for="role" style="display:block; margin-bottom:6px; font-weight:600; color:#6c757d;">Role</label>
+                <select name="role" id="role" class="form-control" style="padding-left:15px;">
+                    <option value="user" selected>User</option>
+                    <option value="admin">Admin</option>
+                </select>
+            </div>
             
             <button type="submit" class="btn btn-register">Register</button>
         </form>

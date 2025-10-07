@@ -114,6 +114,9 @@
             
             <button type="submit" class="btn btn-login">Login</button>
         </form>
+        <div style="text-align:center; margin-top:12px;">
+            <a href="<?= site_url('auth/forgot_password'); ?>" style="color:#2d5a2d; font-weight:600;">Forgot password?</a>
+        </div>
         
         <div class="register-link">
             Don't have an account? <a href="<?= site_url('auth/register'); ?>">Register</a>
