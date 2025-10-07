@@ -58,7 +58,6 @@ class Auth extends Controller {
             $email = $this->io->post('email');
             $password = $this->io->post('password');
             $confirm_password = $this->io->post('confirm_password');
-            $role = $this->io->post('role') ?? 'user';
 
             // Validation
             if (empty($username) || empty($email) || empty($password) || empty($confirm_password)) {
@@ -102,8 +101,7 @@ class Auth extends Controller {
             $data = [
                 'username' => $username,
                 'email' => $email,
-                'password' => $password,
-                'role' => in_array($role, ['admin','user']) ? $role : 'user'
+                'password' => $password
             ];
 
             if ($this->User_model->create($data)) {
@@ -122,75 +120,7 @@ class Auth extends Controller {
         }
     }
 
-    public function forgot_password()
-    {
-        if ($this->io->method() === 'post') {
-            $email = $this->io->post('email');
-            if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                $_SESSION['error'] = 'Please enter a valid email.';
-                redirect(site_url('auth/forgot_password'));
-                return;
-            }
-
-            $user = $this->User_model->get_by_email($email);
-            if (!$user) {
-                // Do not reveal existence
-                $_SESSION['success'] = 'If an account with that email exists, a reset link was sent.';
-                redirect(site_url('auth/forgot_password'));
-                return;
-            }
-
-            // create reset token
-            $token = bin2hex(random_bytes(16));
-            $expires = date('Y-m-d H:i:s', time() + 3600); // 1 hour
-            $this->User_model->save_reset_token($user['id'], $token, $expires);
-
-            // In a real app send email. For now show the link so developer can test.
-            $reset_link = site_url('auth/reset_password?token=' . $token);
-            $_SESSION['success'] = "Reset link: {$reset_link}";
-            redirect(site_url('auth/forgot_password'));
-        } else {
-            $this->call->view('forgot_password');
-        }
-    }
-
-    public function reset_password()
-    {
-        if ($this->io->method() === 'post') {
-            $token = $this->io->post('token');
-            $password = $this->io->post('password');
-            $confirm = $this->io->post('confirm_password');
-
-            if (empty($token) || empty($password) || empty($confirm)) {
-                $_SESSION['error'] = 'Please fill in all fields.';
-                redirect(site_url('auth/reset_password?token=' . urlencode($token)));
-                return;
-            }
-
-            if ($password !== $confirm) {
-                $_SESSION['error'] = 'Passwords do not match.';
-                redirect(site_url('auth/reset_password?token=' . urlencode($token)));
-                return;
-            }
-
-            $user = $this->User_model->get_by_reset_token($token);
-            if (!$user) {
-                $_SESSION['error'] = 'Invalid or expired token.';
-                redirect(site_url('auth/forgot_password'));
-                return;
-            }
-
-            $this->User_model->update($user['id'], ['password' => $password]);
-            // clear token
-            $this->User_model->clear_reset_token($user['id']);
-
-            $_SESSION['success'] = 'Password reset successful. Please login.';
-            redirect(site_url('auth/login'));
-        } else {
-            $token = $_GET['token'] ?? '';
-            $this->call->view('reset_password', ['token' => $token]);
-        }
-    }
+    
 
     public function logout() {
         session_destroy();
