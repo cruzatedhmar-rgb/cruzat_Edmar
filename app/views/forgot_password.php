@@ -13,11 +13,8 @@
 </head>
 <body>
     <div class="card">
-        <div class="brand">
-            <img src="/favicon.ico" alt="logo" class="brand-logo">
-            <h3 style="color:#2d5a2d; text-align:center; margin-bottom:0.5rem;">Forgot password</h3>
-            <p class="lead small" style="text-align:center; margin-bottom:1rem;">Enter your account email and we'll send a reset link.</p>
-        </div>
+        <h3 style="color:#2d5a2d; text-align:center; margin-bottom:0.5rem;">Forgot password</h3>
+        <p class="lead small" style="text-align:center; margin-bottom:1rem;">Enter your account email and we'll send a reset link.</p>
 
         <?php if (isset($_SESSION['error'])): ?>
             <div class="alert alert-danger"><?= html_escape($_SESSION['error']); unset($_SESSION['error']); ?></div>

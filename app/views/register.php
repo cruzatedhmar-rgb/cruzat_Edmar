@@ -28,49 +28,30 @@
             font-weight: bold;
             font-size: 2rem;
             text-align: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1rem;
         }
         .form-group {
-                <form action="<?= site_url('auth/register'); ?>" method="post" class="form">
-                    <div class="form-group">
-                        <label class="form-label" for="username">Username</label>
-                        <input id="username" type="text" class="form-control" name="username" placeholder="Choose a username" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="email">Email</label>
-                        <input id="email" type="email" class="form-control" name="email" placeholder="you@example.com" required>
-                    </div>
-
-                    <div class="form-row">
-                        <div class="form-group half">
-                            <label class="form-label" for="password">Password</label>
-                            <input id="password" type="password" class="form-control" name="password" placeholder="Create password" required>
-                        </div>
-
-                        <div class="form-group half">
-                            <label class="form-label" for="confirm_password">Confirm</label>
-                            <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="Repeat password" required>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-register">Create account</button>
-                </form>
-
-                <div class="login-link">
-                    <span class="small">Already have an account?</span> <a href="<?= site_url('auth/login'); ?>">Sign in</a>
-                </div>
-            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+        .form-row { display:flex; gap:12px; }
+        .form-row .half { flex:1; }
+        .form-label { font-weight:600; color:#495057; margin-bottom:6px; display:block; }
+        .btn-register {
+            background-color: #2d5a2d;
+            border: none;
+            border-radius: 10px;
+            padding: 12px;
+            font-size: 1.05rem;
             font-weight: 600;
             color: white;
             width: 100%;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(45, 90, 45, 0.3);
+            box-shadow: 0 4px 15px rgba(45, 90, 45, 0.15);
         }
         .btn-register:hover {
             background-color: #1e3f1e;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(45, 90, 45, 0.4);
+            box-shadow: 0 6px 20px rgba(45, 90, 45, 0.2);
             color: white;
         }
         .login-link {

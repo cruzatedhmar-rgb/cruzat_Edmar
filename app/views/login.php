@@ -92,8 +92,9 @@
 </head>
 <body>
     <div class="login-card">
-        <h2 class="login-title">Login</h2>
-        
+        <h2 class="login-title">Sign in</h2>
+        <p class="lead" style="text-align:center; margin-bottom:1.25rem; color:#6c757d;">Access your account securely</p>
+
         <?php if (isset($_SESSION['error'])): ?>
             <div class="alert alert-danger" role="alert">
                 <?= html_escape($_SESSION['error']); ?>
@@ -101,39 +102,24 @@
             </div>
         <?php endif; ?>
 
-        <form action="<?= site_url('auth/login'); ?>" method="post">
-            <div class="login-card">
-                <div class="brand">
-                    <img src="/favicon.ico" alt="logo" class="brand-logo">
-                    <h1 class="login-title">Sign in</h1>
-                    <p class="lead">Access your account securely</p>
-                </div>
-
-                <?php if (isset($_SESSION['error'])): ?>
-                    <div class="alert alert-danger" role="alert">
-                        <?= html_escape($_SESSION['error']); ?>
-                        <?php unset($_SESSION['error']); ?>
-                    </div>
-                <?php endif; ?>
-
-                <form action="<?= site_url('auth/login'); ?>" method="post" class="form">
-                    <div class="form-group">
-                        <label for="username" class="form-label">Username</label>
-                        <input id="username" type="text" class="form-control" name="username" placeholder="Enter your username" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="password" class="form-label">Password</label>
-                        <input id="password" type="password" class="form-control" name="password" placeholder="Enter your password" required>
-                    </div>
-
-                    <div class="form-actions">
-                        <a class="text-muted small" href="<?= site_url('auth/forgot_password'); ?>">Forgot password?</a>
-                        <button type="submit" class="btn btn-login">Sign in</button>
-                    </div>
-                </form>
-
-                <div class="register-link">
-                    <span class="small">Don't have an account?</span> <a href="<?= site_url('auth/register'); ?>">Create account</a>
-                </div>
+        <form action="<?= site_url('auth/login'); ?>" method="post" class="form">
+            <div class="form-group">
+                <label for="username" class="form-label">Username</label>
+                <input id="username" type="text" class="form-control" name="username" placeholder="Enter your username" required>
             </div>
+
+            <div class="form-group">
+                <label for="password" class="form-label">Password</label>
+                <input id="password" type="password" class="form-control" name="password" placeholder="Enter your password" required>
+            </div>
+
+            <div class="form-actions" style="display:flex; align-items:center; justify-content:space-between; gap:12px;">
+                <a class="text-muted small" href="<?= site_url('auth/forgot_password'); ?>">Forgot password?</a>
+                <button type="submit" class="btn btn-login">Sign in</button>
+            </div>
+        </form>
+
+        <div class="register-link">
+            <span class="small">Don't have an account?</span> <a href="<?= site_url('auth/register'); ?>">Create account</a>
+        </div>
+    </div>
