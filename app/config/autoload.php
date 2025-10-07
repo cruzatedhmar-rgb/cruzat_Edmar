@@ -91,7 +91,7 @@ $autoload['helpers'] = array('url');
 |
 |	$autoload['model'] = array('model1_model', 'model2_model')
 */
-$autoload['models'] = array('author_model');
+$autoload['models'] = array('Student_model');
 
 /*
 | -------------------------------------------------------------------
