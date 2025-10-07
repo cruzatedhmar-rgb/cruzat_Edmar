@@ -31,33 +31,35 @@
             margin-bottom: 2rem;
         }
         .form-group {
-            margin-bottom: 1.5rem;
-            position: relative;
-        }
-        .form-control {
-            border: 2px solid #e9ecef;
-            border-radius: 10px;
-            padding: 12px 15px 12px 45px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-        .form-control:focus {
-            border-color: #2d5a2d;
-            box-shadow: 0 0 0 0.2rem rgba(45, 90, 45, 0.25);
-        }
-        .input-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #6c757d;
-            font-size: 1.1rem;
-        }
-        .btn-register {
-            background-color: #2d5a2d;
-            border: none;
-            border-radius: 10px;
-            padding: 12px;
+                <form action="<?= site_url('auth/register'); ?>" method="post" class="form">
+                    <div class="form-group">
+                        <label class="form-label" for="username">Username</label>
+                        <input id="username" type="text" class="form-control" name="username" placeholder="Choose a username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="email">Email</label>
+                        <input id="email" type="email" class="form-control" name="email" placeholder="you@example.com" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label class="form-label" for="password">Password</label>
+                            <input id="password" type="password" class="form-control" name="password" placeholder="Create password" required>
+                        </div>
+
+                        <div class="form-group half">
+                            <label class="form-label" for="confirm_password">Confirm</label>
+                            <input id="confirm_password" type="password" class="form-control" name="confirm_password" placeholder="Repeat password" required>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-register">Create account</button>
+                </form>
+
+                <div class="login-link">
+                    <span class="small">Already have an account?</span> <a href="<?= site_url('auth/login'); ?>">Sign in</a>
+                </div>
             font-size: 1.1rem;
             font-weight: 600;
             color: white;

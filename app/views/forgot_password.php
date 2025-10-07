@@ -13,7 +13,11 @@
 </head>
 <body>
     <div class="card">
-        <h3 style="color:#2d5a2d; text-align:center; margin-bottom:1rem;">Forgot Password</h3>
+        <div class="brand">
+            <img src="/favicon.ico" alt="logo" class="brand-logo">
+            <h3 style="color:#2d5a2d; text-align:center; margin-bottom:0.5rem;">Forgot password</h3>
+            <p class="lead small" style="text-align:center; margin-bottom:1rem;">Enter your account email and we'll send a reset link.</p>
+        </div>
 
         <?php if (isset($_SESSION['error'])): ?>
             <div class="alert alert-danger"><?= html_escape($_SESSION['error']); unset($_SESSION['error']); ?></div>
@@ -23,10 +27,10 @@
             <div class="alert alert-success"><?= html_escape($_SESSION['success']); unset($_SESSION['success']); ?></div>
         <?php endif; ?>
 
-        <form action="<?= site_url('auth/forgot_password'); ?>" method="post">
-            <div class="mb-3">
-                <label for="email" class="form-label">Enter your account email</label>
-                <input type="email" name="email" id="email" class="form-control" required>
+        <form action="<?= site_url('auth/forgot_password'); ?>" method="post" class="form">
+            <div class="form-group">
+                <label class="form-label" for="email">Email address</label>
+                <input id="email" type="email" name="email" class="form-control" placeholder="you@example.com" required>
             </div>
             <button class="btn btn-primary w-100">Send reset link</button>
         </form>

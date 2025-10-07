@@ -102,27 +102,38 @@
         <?php endif; ?>
 
         <form action="<?= site_url('auth/login'); ?>" method="post">
-            <div class="form-group">
-                <span class="input-icon">👤</span>
-                <input type="text" class="form-control" name="username" placeholder="Username" required>
-            </div>
-            
-            <div class="form-group">
-                <span class="input-icon">🔒</span>
-                <input type="password" class="form-control" name="password" placeholder="Password" required>
-            </div>
-            
-            <button type="submit" class="btn btn-login">Login</button>
-        </form>
-        <div style="text-align:center; margin-top:12px;">
-            <a href="<?= site_url('auth/forgot_password'); ?>" style="color:#2d5a2d; font-weight:600;">Forgot password?</a>
-        </div>
-        
-        <div class="register-link">
-            Don't have an account? <a href="<?= site_url('auth/register'); ?>">Register</a>
-        </div>
-    </div>
+            <div class="login-card">
+                <div class="brand">
+                    <img src="/favicon.ico" alt="logo" class="brand-logo">
+                    <h1 class="login-title">Sign in</h1>
+                    <p class="lead">Access your account securely</p>
+                </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
-</html>
+                <?php if (isset($_SESSION['error'])): ?>
+                    <div class="alert alert-danger" role="alert">
+                        <?= html_escape($_SESSION['error']); ?>
+                        <?php unset($_SESSION['error']); ?>
+                    </div>
+                <?php endif; ?>
+
+                <form action="<?= site_url('auth/login'); ?>" method="post" class="form">
+                    <div class="form-group">
+                        <label for="username" class="form-label">Username</label>
+                        <input id="username" type="text" class="form-control" name="username" placeholder="Enter your username" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password" class="form-label">Password</label>
+                        <input id="password" type="password" class="form-control" name="password" placeholder="Enter your password" required>
+                    </div>
+
+                    <div class="form-actions">
+                        <a class="text-muted small" href="<?= site_url('auth/forgot_password'); ?>">Forgot password?</a>
+                        <button type="submit" class="btn btn-login">Sign in</button>
+                    </div>
+                </form>
+
+                <div class="register-link">
+                    <span class="small">Don't have an account?</span> <a href="<?= site_url('auth/register'); ?>">Create account</a>
+                </div>
+            </div>
