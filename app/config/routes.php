@@ -49,10 +49,16 @@ $router->post('/auth/login', 'Auth::login');
 $router->get('/auth/register', 'Auth::register');
 $router->post('/auth/register', 'Auth::register');
 $router->get('/auth/logout', 'Auth::logout');
-$router->get('/auth/forgot_password', 'Pages::forgot_password');
-$router->post('/auth/forgot_password', 'Pages::forgot_password');
-$router->get('/auth/reset_password', 'Pages::reset_password');
-$router->post('/auth/reset_password', 'Pages::reset_password');
+
+// Password reset routes
+$router->get('/auth/forgot-password', 'Auth::forgot_password');
+$router->post('/auth/forgot-password', 'Auth::forgot_password');
+$router->get('/auth/reset-password/{token}', 'Auth::reset_password');
+$router->post('/auth/reset-password/{token}', 'Auth::reset_password');
+
+// Maintenance (admin-only)
+$router->get('/maintenance/add-role-column', 'Maintenance::add_role_column');
+$router->get('/maintenance/drop-authors-birthdate-added', 'Maintenance::drop_authors_birthdate_added');
 
 // Default route redirects to login
 $router->get('/', 'Auth::login');

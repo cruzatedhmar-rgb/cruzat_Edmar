@@ -19,6 +19,7 @@ try {
         `username` varchar(50) NOT NULL UNIQUE,
         `email` varchar(100) NOT NULL UNIQUE,
         `password` varchar(255) NOT NULL,
+        `role` enum('admin','user') NOT NULL DEFAULT 'user',
         `created_at` datetime NOT NULL,
         `updated_at` datetime NOT NULL,
         PRIMARY KEY (`id`)
@@ -36,7 +37,7 @@ try {
     if ($count == 0) {
         // Insert default admin user (username: admin, password: admin123)
         $adminPassword = password_hash('admin123', PASSWORD_DEFAULT);
-        $insertSql = "INSERT INTO `users` (`username`, `email`, `password`) VALUES (?, ?, ?)";
+        $insertSql = "INSERT INTO `user` (`username`, `email`, `password`, `role`, `created_at`, `updated_at`) VALUES (?, ?, ?, 'admin', NOW(), NOW())";
         $stmt = $pdo->prepare($insertSql);
         $stmt->execute(['admin', 'admin@example.com', $adminPassword]);
         echo "Default admin user created successfully!\n";

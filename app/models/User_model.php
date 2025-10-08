@@ -10,8 +10,27 @@ class User_model extends Model {
         parent::__construct();
     }
 
+    // Ensure 'role' column exists; add if missing and set default admin
+    public function ensure_role_column() {
+        try {
+            $check = $this->db->raw("SHOW COLUMNS FROM `{$this->table}` LIKE 'role'");
+            $exists = $check->fetch();
+            if (!$exists) {
+                // Add role column
+                $this->db->raw("ALTER TABLE `{$this->table}` ADD COLUMN `role` ENUM('admin','user') NOT NULL DEFAULT 'user' AFTER `password`");
+                // Ensure default admin stays admin if present
+                $this->db->raw("UPDATE `{$this->table}` SET `role`='admin' WHERE `username`='admin'");
+            }
+        } catch (Exception $e) {
+            // Silently ignore to avoid breaking requests if permissions are limited
+        }
+    }
+
     public function create($data) {
         $data['password'] = password_hash($data['password'], PASSWORD_DEFAULT);
+        if (!isset($data['role']) || empty($data['role'])) {
+            $data['role'] = 'user';
+        }
         $data['created_at'] = date('Y-m-d H:i:s');
         $data['updated_at'] = date('Y-m-d H:i:s');
         return $this->db->table($this->table)->insert($data);
@@ -47,35 +66,6 @@ class User_model extends Model {
         return $this->db->table($this->table)
                     ->where($this->primary_key, $id)
                     ->update($data);
-    }
-
-    /**
-     * Save reset token (token, expires_at) for a user
-     */
-    public function save_reset_token($user_id, $token, $expires_at)
-    {
-        return $this->db->table($this->table)
-                    ->where($this->primary_key, $user_id)
-                    ->update(['reset_token' => $token, 'reset_expires_at' => $expires_at, 'updated_at' => date('Y-m-d H:i:s')]);
-    }
-
-    public function get_by_reset_token($token)
-    {
-        $row = $this->db->table($this->table)
-                    ->where('reset_token', $token)
-                    ->get();
-        if (!$row) return false;
-        if (isset($row['reset_expires_at']) && strtotime($row['reset_expires_at']) < time()) {
-            return false;
-        }
-        return $row;
-    }
-
-    public function clear_reset_token($user_id)
-    {
-        return $this->db->table($this->table)
-                    ->where($this->primary_key, $user_id)
-                    ->update(['reset_token' => null, 'reset_expires_at' => null, 'updated_at' => date('Y-m-d H:i:s')]);
     }
 
     public function delete($id) {

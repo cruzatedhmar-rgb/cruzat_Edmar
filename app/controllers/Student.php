@@ -52,7 +52,6 @@ class Student extends Controller {
                     'first_name' => $this->io->post('first_name'),
                     'last_name' => $this->io->post('last_name'),
                     'email' => $this->io->post('email'),
-                    'birthdate' => $this->io->post('birthdate'),
                 ];
                 $this->Student_model->create($data);
                 redirect(site_url('student/all'));
@@ -62,6 +61,11 @@ class Student extends Controller {
 
         public function edit($id)
         {
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+            $_SESSION['error'] = 'You are not authorized to edit records.';
+            redirect(site_url('student/all'));
+            return;
+        }
         $student = $this->Student_model->get($id);
             if (!$student) {
                 show_404();
@@ -71,7 +75,6 @@ class Student extends Controller {
                     'first_name' => $this->io->post('first_name'),
                     'last_name' => $this->io->post('last_name'),
                     'email' => $this->io->post('email'),
-                    'birthdate' => $this->io->post('birthdate'),
                 ];
                 $this->Student_model->update($id, $data);
                 redirect(site_url('student/all'));
@@ -81,7 +84,12 @@ class Student extends Controller {
 
         public function delete($id)
         {
-            $this->Student_model->delete($id);
+        if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+            $_SESSION['error'] = 'You are not authorized to delete records.';
+            redirect(site_url('student/all'));
+            return;
+        }
+        $this->Student_model->delete($id);
             redirect(site_url('student/all'));
         }
 }
