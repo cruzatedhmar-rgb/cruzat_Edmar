@@ -29,8 +29,16 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             overflow: hidden;
         }
 
+
+        :root{
+            --accent: #6d28d9; /* purple */
+            --accent-2: #4f46e5; /* indigo */
+            --muted: #334155;
+            --card-bg: #f8fafc;
+        }
+
         .header {
-            background: #3B82F6; /* lighter blue */
+            background: linear-gradient(90deg, var(--accent-2), var(--accent));
             color: #ffffff;
             padding: 2rem;
             text-align: center;
@@ -46,7 +54,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
         h2 {
-            color: #1e40af;
+            color: var(--accent-2);
             margin-top: 2rem;
         }
 
@@ -59,10 +67,10 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
             display: block;
             background: #f1f5f9;
             padding: 1rem;
-            border-left: 4px solid #3b82f6;
+            border-left: 4px solid var(--accent-2);
             margin-bottom: 1rem;
             font-size: 0.9rem;
-            color: #1e293b;
+            color: #0f172a;
             overflow-x: auto;
         }
 
@@ -99,7 +107,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
         }
 
         .card {
-            background: #f8fafc;
+            background: var(--card-bg);
             padding: 1rem;
             border-radius: 6px;
             border: 1px solid #e2e8f0;

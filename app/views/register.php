@@ -6,58 +6,68 @@
     <title>Register</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body {
-            background: linear-gradient(135deg, #e8f5e8 0%, #d7efd7 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            padding: 2rem 0;
-        }
-        .register-card {
-            background: #ffffff;
-            border-radius: 16px;
-            border: 1px solid #d6e9d6;
-            box-shadow: 0 16px 36px rgba(45, 90, 45, 0.15);
-            padding: 2rem;
-            width: 100%;
-            max-width: 470px;
-        }
-        .register-title {
-            color: #245224;
-            font-weight: 800;
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
+        :root{
+                --bg-1: #f0f7ff;
+                --bg-2: #e9eeff;
+                --card-bg: #ffffff;
+                --accent: #6d28d9;
+                --accent-2: #4f46e5;
+                --muted: #6b7280;
+            }
+
+            body {
+                background: linear-gradient(135deg, var(--bg-1) 0%, var(--bg-2) 100%);
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+                padding: 2rem 0;
+            }
+            .register-card {
+                background: var(--card-bg);
+                border-radius: 16px;
+                border: 1px solid rgba(79,70,229,0.08);
+                box-shadow: 0 16px 36px rgba(79,70,229,0.08);
+                padding: 2rem;
+                width: 100%;
+                max-width: 470px;
+            }
+            .register-title {
+                color: var(--accent-2);
+                font-weight: 800;
+                font-size: 2rem;
+                text-align: center;
+                margin-bottom: 1.5rem;
+            }
         .form-group {
             margin-bottom: 1.5rem;
             position: relative;
         }
         .form-control {
-            border: 2px solid #e1f0e1;
+            border: 2px solid rgba(79,70,229,0.12);
             border-radius: 10px;
             padding: 12px 15px;
             font-size: 1rem;
-            transition: all 0.25s ease;
-            background-color: #f7fbf7;
+            transition: all 0.2s ease;
+            background-color: #fbfbff;
+            color: #0f172a;
         }
         .form-control:focus {
-            border-color: #2d5a2d;
-            box-shadow: 0 0 0 0.2rem rgba(45, 90, 45, 0.2);
+            border-color: var(--accent-2);
+            box-shadow: 0 0 0 0.2rem rgba(79,70,229,0.12);
             background-color: #ffffff;
         }
         .form-select {
-            border: 2px solid #e1f0e1;
+            border: 2px solid rgba(79,70,229,0.12);
             border-radius: 10px;
             padding: 10px 12px;
-            background-color: #f7fbf7;
-            transition: all 0.25s ease;
+            background-color: #fbfbff;
+            transition: all 0.2s ease;
         }
         .form-select:focus {
-            border-color: #2d5a2d;
-            box-shadow: 0 0 0 0.2rem rgba(45, 90, 45, 0.2);
+            border-color: var(--accent-2);
+            box-shadow: 0 0 0 0.2rem rgba(79,70,229,0.12);
             background-color: #ffffff;
         }
         .input-icon {
@@ -69,7 +79,7 @@
             font-size: 1.1rem;
         }
         .btn-register {
-            background-color: #2d5a2d;
+            background: linear-gradient(90deg, var(--accent-2), var(--accent));
             border: none;
             border-radius: 10px;
             padding: 12px;
@@ -78,32 +88,31 @@
             color: white;
             width: 100%;
             transition: all 0.25s ease;
-            box-shadow: 0 6px 16px rgba(45, 90, 45, 0.35);
+            box-shadow: 0 8px 22px rgba(79,70,229,0.18);
         }
         .btn-register:hover {
-            background-color: #244a24;
             transform: translateY(-2px);
-            box-shadow: 0 8px 22px rgba(45, 90, 45, 0.45);
+            box-shadow: 0 12px 30px rgba(79,70,229,0.22);
             color: #ffffff;
         }
         .login-link {
             text-align: center;
             margin-top: 1.5rem;
-            color: #6c757d;
+            color: var(--muted);
         }
         .login-link a {
-            color: #2d5a2d;
+            color: var(--accent-2);
             text-decoration: none;
             font-weight: 600;
         }
         .login-link a:hover {
-            color: #244a24;
+            color: var(--accent);
             text-decoration: underline;
         }
         .alert {
             border-radius: 10px;
             margin-bottom: 1rem;
-            border: 1px solid #d6e9d6;
+            border: 1px solid rgba(79,70,229,0.06);
         }
     </style>
 </head>

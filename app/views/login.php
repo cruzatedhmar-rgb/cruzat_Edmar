@@ -6,31 +6,41 @@
   <title>Login</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
+    :root{
+      --bg-1: #eef2ff; /* light indigo */
+      --bg-2: #e0e7ff; /* soft periwinkle */
+      --card-bg: #ffffff;
+      --accent: #6d28d9; /* purple-700 */
+      --accent-2: #4f46e5; /* indigo-600 */
+      --muted: #6b7280;
+    }
+
     body {
-      background: linear-gradient(to right, #E8F5E9, #C8E6C9);
+      background: linear-gradient(135deg, var(--bg-1), var(--bg-2));
       min-height: 100vh;
       display: flex;
       align-items: center;
       justify-content: center;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      -webkit-font-smoothing: antialiased;
     }
 
     .login-card {
-      background: #ffffff;
+      background: var(--card-bg);
       border-radius: 16px;
-      border: 1px solid #C8E6C9;
-      box-shadow: 0 10px 25px rgba(0, 128, 0, 0.1);
+      border: 1px solid rgba(79,70,229,0.08);
+      box-shadow: 0 12px 30px rgba(79,70,229,0.08);
       padding: 2rem;
       width: 100%;
       max-width: 420px;
     }
 
     .login-title {
-      color: #2E7D32;
+      color: var(--accent);
       font-weight: 700;
       font-size: 2rem;
       text-align: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.25rem;
     }
 
     .form-group {
@@ -39,60 +49,64 @@
 
     .form-control,
     .form-select {
-      border: 2px solid #A5D6A7;
+      border: 2px solid rgba(79,70,229,0.12);
       border-radius: 10px;
-      background-color: #F1F8F1;
+      background-color: #fbfbff;
       padding: 12px 15px;
       font-size: 1rem;
-      transition: 0.3s;
+      transition: 0.2s;
+      color: #0f172a;
     }
+
+    .form-control::placeholder { color: #94a3b8; }
 
     .form-control:focus,
     .form-select:focus {
-      border-color: #388E3C;
+      border-color: var(--accent-2);
       background-color: #ffffff;
-      box-shadow: 0 0 0 0.2rem rgba(56, 142, 60, 0.25);
+      box-shadow: 0 0 0 0.2rem rgba(79,70,229,0.12);
+      outline: none;
     }
 
     .btn-login {
-      background-color: #388E3C;
+      background: linear-gradient(90deg, var(--accent-2), var(--accent));
       color: #fff;
       border: none;
       border-radius: 10px;
       padding: 12px;
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 600;
       width: 100%;
-      box-shadow: 0 6px 18px rgba(56, 142, 60, 0.3);
+      box-shadow: 0 8px 22px rgba(79,70,229,0.18);
       transition: all 0.25s ease;
     }
 
     .btn-login:hover {
-      background-color: #2E7D32;
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(56, 142, 60, 0.4);
+      box-shadow: 0 12px 30px rgba(79,70,229,0.22);
     }
 
     .register-link {
       text-align: center;
       margin-top: 1rem;
-      color: #666;
+      color: var(--muted);
+      font-size: 0.95rem;
     }
 
     .register-link a {
-      color: #2E7D32;
+      color: var(--accent-2);
       font-weight: 600;
       text-decoration: none;
     }
 
     .register-link a:hover {
       text-decoration: underline;
-      color: #1B5E20;
+      color: var(--accent);
     }
 
     .alert {
       border-radius: 10px;
-      border: 1px solid #C8E6C9;
+      border: 1px solid rgba(79,70,229,0.06);
     }
   </style>
 </head>
