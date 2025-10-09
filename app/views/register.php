@@ -139,15 +139,14 @@
                 <label class="form-label">Role</label>
                 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
                     <select class="form-select" name="role" required>
-                        <option value="" selected disabled>Select</option>
+                        <option value="" selected required>Select</option>
                         <option value="user">User</option>
                         <option value="admin">Admin</option>
                     </select>
                 <?php else: ?>
-                    <select class="form-select" name="role" disabled>
+                    <select class="form-select" name="role" required>
                         <option value="" selected disabled>Select</option>
                         <option value="user">User</option>
-                        <option value="admin">Admin</option>
                     </select>
                     <input type="hidden" name="role" value="user">
                 <?php endif; ?>
