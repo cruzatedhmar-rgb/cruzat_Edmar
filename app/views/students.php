@@ -5,154 +5,167 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Welcome to Profile View</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
 <style>
+  /* 🌈 Background and overall look */
   body {
-    background-color: #e8f5e8;
-    background-image: url('assets/images/minsu_logo-removebg-preview.png');
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: 300px;
+    background: linear-gradient(135deg, #a8c0ff, #3f2b96);
     background-attachment: fixed;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
+    color: #333;
   }
 
   .page-title {
-    color: #2d5a2d;
-    font-size: 2.5rem;
-    font-weight: bold;
+    color: #ffffff;
+    font-size: 2.8rem;
+    font-weight: 700;
     text-align: center;
     margin-bottom: 2rem;
-    text-shadow: 1px 1px 2px #ffffff;
+    text-shadow: 1px 2px 4px rgba(0,0,0,0.3);
+  }
+
+  /* 🌟 Glassmorphism container */
+  .container {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    padding: 30px;
+  }
+
+  /* 🔍 Search Bar & Button */
+  .search-container {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 25px;
+  }
+
+  .form-control {
+    border-radius: 10px;
+    border: none;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.1);
+  }
+
+  .search-btn {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-weight: 600;
+    padding: 10px 16px;
+    transition: all 0.3s ease;
+  }
+
+  .search-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(37,117,252,0.4);
+  }
+
+  /* 🧑‍💼 Create, Edit, Delete, Logout Buttons */
+  .create-btn, .edit-btn, .delete-btn, .logout-btn {
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-weight: 600;
+    transition: all 0.3s ease;
   }
 
   .create-btn {
-    background-color: #2d5a2d;
+    background: linear-gradient(135deg, #00c6ff, #0072ff);
     color: white;
-    border: none;
-    border-radius: 8px;
-    padding: 10px 18px;
-    font-weight: 600;
-    transition: 0.3s ease;
   }
 
   .create-btn:hover {
-    background-color: #1e3f1e;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0,114,255,0.4);
   }
 
+  .edit-btn {
+    background: linear-gradient(135deg, #6a11cb, #2575fc);
+    color: white;
+  }
+
+  .edit-btn:hover {
+    transform: scale(1.05);
+  }
+
+  .delete-btn {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+  }
+
+  .delete-btn:hover {
+    transform: scale(1.05);
+  }
+
+  .logout-btn {
+    background: linear-gradient(135deg, #ff416c, #ff4b2b);
+    color: white;
+    border-radius: 8px;
+    text-decoration: none;
+  }
+
+  .logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255,75,43,0.4);
+  }
+
+  /* 📋 Table design */
   .profile-table {
     overflow: hidden;
-    border-radius: 16px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
   }
 
   .table {
-    width: 100%;
-    margin-bottom: 0;
     border-collapse: collapse;
+    width: 100%;
+    margin: 0;
   }
 
-  /* ✅ Dark green header */
   .table-header {
-    background-color: #145214; /* dark green */
+    background: linear-gradient(135deg, #4e54c8, #8f94fb);
     color: white;
     text-transform: uppercase;
-    font-weight: bold;
-    transition: 0.3s ease;
+    font-weight: 600;
   }
 
   .table-header th {
-    padding: 14px;
+    padding: 15px;
     border: none;
   }
 
   .table-body tr:nth-child(odd) {
-    background-color: #dff2df; /* light green */
+    background-color: rgba(255,255,255,0.5);
   }
 
   .table-body tr:nth-child(even) {
-    background-color: white;
+    background-color: rgba(255,255,255,0.7);
   }
 
-  /* ✅ Hover effect sa rows */
   .table-body tr:hover {
-    background-color: #cde9cd !important;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+    background-color: rgba(255,255,255,0.9);
+    transform: scale(1.01);
+    transition: all 0.2s ease;
   }
 
   .table-body td {
     padding: 14px;
-    border: none;
     color: #333;
-  }
-
-  .edit-btn {
-    background-color: #2d5a2d;
-    color: white;
     border: none;
-    border-radius: 20px;
-    padding: 6px 16px;
-    font-weight: 600;
-    transition: 0.3s;
   }
 
-  .edit-btn:hover {
-    background-color: #1e3f1e;
-  }
-
-  .delete-btn {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    padding: 6px 16px;
-    font-weight: 600;
-    transition: 0.3s;
-  }
-
-  .delete-btn:hover {
-    background-color: #c82333;
-  }
-
-  .logout-btn {
-    background-color: #dc3545;
-    color: white;
-    border-radius: 8px;
-    padding: 8px 16px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: 0.3s ease;
-  }
-
-  .logout-btn:hover {
-    background-color: #c82333;
-  }
-
-  .search-container {
-    background: white;
-    border-radius: 10px;
-    padding: 15px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    margin-bottom: 20px;
-  }
-
-  .search-btn {
-    background-color: #2d5a2d;
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-weight: 600;
-  }
-
-  .search-btn:hover {
-    background-color: #1e3f1e;
+  .text-muted {
+    color: #666 !important;
   }
 </style>
-
 </head>
+
 <body>
-<div class="container py-4">
+<div class="container my-4">
   <h1 class="page-title">Welcome to Profile View</h1>
 
   <div class="search-container">
@@ -160,17 +173,17 @@
       <div class="col-md-8">
         <form action="<?= site_url('author'); ?>" method="get" class="d-flex">
           <?php $q = isset($_GET['q']) ? $_GET['q'] : ''; ?>
-          <input class="form-control me-2" name="q" type="text" placeholder="Search..." value="<?= html_escape($q); ?>" style="border-radius: 8px;">
+          <input class="form-control me-2" name="q" type="text" placeholder="Search..." value="<?= html_escape($q); ?>">
           <button type="submit" class="btn search-btn">Search</button>
         </form>
       </div>
       <div class="col-md-2 text-center">
         <?php if (isset($_SESSION['role']) && in_array($_SESSION['role'], ['user', 'admin'])): ?>
-          <a href="<?= site_url('student/create'); ?>" class="btn create-btn">&#43; Create New User</a>
+          <a href="<?= site_url('student/create'); ?>" class="btn create-btn">+ Create User</a>
         <?php endif; ?>
       </div>
       <div class="col-md-2 text-end">
-        <a href="<?= site_url('auth/logout'); ?>" class="logout-btn">Logout</a>
+        <a href="<?= site_url('auth/logout'); ?>" class="btn logout-btn">Logout</a>
       </div>
     </div>
   </div>
@@ -193,8 +206,8 @@
             <td><?= $author['email']; ?></td>
             <td>
               <?php if ($_SESSION['role'] === 'admin'): ?>
-                <a href="<?= site_url('student/edit/'.$author['id']); ?>" class="btn action-btn edit-btn">Edit</a>
-                <a href="<?= site_url('student/delete/'.$author['id']); ?>" class="btn action-btn delete-btn" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
+                <a href="<?= site_url('student/edit/'.$author['id']); ?>" class="btn edit-btn">Edit</a>
+                <a href="<?= site_url('student/delete/'.$author['id']); ?>" class="btn delete-btn" onclick="return confirm('Are you sure you want to delete this user?');">Delete</a>
               <?php else: ?>
                 <span class="text-muted">No actions</span>
               <?php endif; ?>
@@ -212,4 +225,4 @@
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
- </html>
+</html>
